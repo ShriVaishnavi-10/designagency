@@ -7,6 +7,10 @@ import Preloader from "@/components/Preloader";
 export const metadata: Metadata = {
   title: "Aura | Boutique Digital Studio",
   description: "Bespoke digital experiences for visionary brands.",
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
+  }
 };
 
 export default function RootLayout({
