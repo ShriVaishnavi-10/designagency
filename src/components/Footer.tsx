@@ -20,9 +20,6 @@ export default function Footer() {
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="font-jakarta text-[0.85rem] tracking-wider text-muted hover:text-accent transition-colors">Instagram</a>
             </Magnetic>
             <Magnetic strength={0.4}>
-              <a href="https://beiance.com" target="_blank" rel="noopener noreferrer" className="font-jakarta text-[0.85rem] tracking-wider text-muted hover:text-accent transition-colors">Behance</a>
-            </Magnetic>
-            <Magnetic strength={0.4}>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="font-jakarta text-[0.85rem] tracking-wider text-muted hover:text-accent transition-colors">LinkedIn</a>
             </Magnetic>
           </div>

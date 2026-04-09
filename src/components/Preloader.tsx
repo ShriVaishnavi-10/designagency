@@ -28,13 +28,20 @@ export default function Preloader() {
         >
           <div className="relative overflow-hidden flex flex-col items-center">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
-              className="flex items-center gap-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1], delay: 0.4 }}
+              className="flex items-center justify-center"
             >
-              <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center animate-pulse-slow">
-                <Image src="/logo.svg" alt="Aura Logo" width={80} height={80} className="w-full h-full object-contain" />
+              <div className="w-32 h-32 md:w-40 md:h-40 flex items-center justify-center animate-pulse-slow">
+                <Image 
+                  src="/logo.svg" 
+                  alt="Aura Logo" 
+                  width={160} 
+                  height={160} 
+                  className="w-full h-full object-contain" 
+                  priority
+                />
               </div>
             </motion.div>
             
