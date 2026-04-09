@@ -1,5 +1,5 @@
 'use client';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { useRef, ReactNode } from 'react';
 
 interface ScrollRevealProps {
@@ -20,18 +20,20 @@ export default function ScrollReveal({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "0px" });
 
-  const getVariants = () => {
+  const getVariants = (): Variants => {
     if (direction === 'mask') return {
-      hidden: {},
-      visible: {}
+      hidden: { opacity: 1 },
+      visible: { opacity: 1 }
     };
 
-    const hidden = {
+    const hiddenValues = {
       up: { opacity: 0, y: 40 },
       down: { opacity: 0, y: -40 },
       left: { opacity: 0, x: 40 },
       right: { opacity: 0, x: -40 },
-    }[direction as 'up' | 'down' | 'left' | 'right'] || { opacity: 0, y: 40 };
+    };
+
+    const hidden = (direction !== 'mask' ? hiddenValues[direction as keyof typeof hiddenValues] : { opacity: 0, y: 40 }) || { opacity: 0, y: 40 };
 
     return {
       hidden,
