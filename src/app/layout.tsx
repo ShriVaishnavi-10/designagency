@@ -24,8 +24,8 @@ export default function RootLayout({
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="dark"
+          forcedTheme={undefined}
           enableSystem={false}
-          storageKey="aura-theme"
         >
           <Preloader />
           <CustomCursor />
