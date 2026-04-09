@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Preloader() {
@@ -32,8 +33,8 @@ export default function Preloader() {
               transition={{ duration: 1, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
               className="flex items-center gap-4"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 border-2 border-accent/20 rounded-full flex items-center justify-center animate-pulse-slow">
-                <span className="font-playfair text-4xl md:text-5xl text-accent">A</span>
+              <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center animate-pulse-slow">
+                <Image src="/logo.svg" alt="Aura Logo" width={80} height={80} className="w-full h-full object-contain" />
               </div>
             </motion.div>
             

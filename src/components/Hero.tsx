@@ -1,6 +1,7 @@
 'use client';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 import GoldDust from './GoldDust';
 
 export default function Hero() {
@@ -33,9 +34,13 @@ export default function Hero() {
           style={{ opacity }}
           className="w-full max-w-[900px] mx-auto flex flex-col items-center animate-fade-up"
         >
-          <div className="flex items-center gap-4 font-jakarta text-[0.85rem] tracking-[0.2em] uppercase text-accent mb-10">
+          <div className="flex items-center gap-5 font-jakarta text-[0.85rem] tracking-[0.2em] uppercase text-accent mb-10">
             <span className="w-10 h-[1px] bg-accent"></span>
-            <span>Aura Design Studio</span>
+            <div className="flex items-center gap-3">
+              <Image src="/logo.svg" alt="Aura Logo" width={24} height={24} className="w-6 h-6" />
+              <span>Aura Design Studio</span>
+            </div>
+            <span className="w-10 h-[1px] bg-accent"></span>
           </div>
           
           <h1 className="title-primary text-center text-foreground">
