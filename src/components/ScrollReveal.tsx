@@ -21,7 +21,10 @@ export default function ScrollReveal({
   const isInView = useInView(ref, { once: true, margin: "0px" });
 
   const getVariants = () => {
-    if (direction === 'mask') return {}; // We apply CSS class instead
+    if (direction === 'mask') return {
+      hidden: {},
+      visible: {}
+    };
 
     const hidden = {
       up: { opacity: 0, y: 40 },
