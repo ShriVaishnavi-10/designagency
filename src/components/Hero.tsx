@@ -1,17 +1,46 @@
+'use client';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import GoldDust from './GoldDust';
+
 export default function Hero() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   return (
-    <section className="hero-background">
+    <section ref={containerRef} className="hero-background overflow-hidden relative">
+      <GoldDust />
+      
+      {/* Parallax Background Layer */}
+      <motion.div 
+        style={{ y }}
+        className="absolute top-0 left-0 w-full h-full -z-[1]"
+      >
+        <div className="hero-background-overlay hero-bg-dark" />
+        <div className="hero-background-overlay hero-bg-light" />
+      </motion.div>
+
       <div className="ambient-glow"></div>
+      
       <div className="container relative z-[1]">
-        <div className="w-full max-w-[900px] mx-auto flex flex-col items-center animate-fade-up">
+        <motion.div 
+          style={{ opacity }}
+          className="w-full max-w-[900px] mx-auto flex flex-col items-center animate-fade-up"
+        >
           <div className="flex items-center gap-4 font-jakarta text-[0.85rem] tracking-[0.2em] uppercase text-accent mb-10">
             <span className="w-10 h-[1px] bg-accent"></span>
             <span>Aura Design Studio</span>
           </div>
           
-          <h1 className="title-primary text-center">
+          <h1 className="title-primary text-center text-foreground">
             Elevating digital<br />
-            <span className="italic-serif">experiences</span> to art.
+            <span className="italic-serif text-accent">experiences</span> to art.
           </h1>
           
           <p className="text-[clamp(1.1rem,2vw,1.3rem)] font-light text-muted leading-[1.8] mt-10 mb-[50px] max-w-[650px] text-center">
@@ -22,7 +51,7 @@ export default function Hero() {
             <a href="#work" className="btn-primary">View Portfolio</a>
             <a href="#services" className="btn-outline">Our Expertise</a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -6,6 +6,7 @@
 
 :root {
   --background: #040405;
+  --bg-soft: #0A0A0C;
   --foreground: #FDFCF0;
   --muted: #9E9D97;
   --accent: #D4AF37;
@@ -18,6 +19,7 @@
 
 [data-theme='light'] {
   --background: #F8F6F0; /* Alabaster Cream */
+  --bg-soft: #F0EEE4;    /* Subtle darker cream for section contrast */
   --foreground: #0A0A0C; /* Near Black */
   --muted: #565551;
   --accent: #B88A44; /* Champagne gold */
@@ -32,6 +34,34 @@
     @apply font-jakarta leading-relaxed overflow-x-hidden scroll-smooth transition-colors duration-500;
   }
   
+  /* Cinema Grain Overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+    animation: grainMove 8s steps(10) infinite;
+  }
+
+  @keyframes grainMove {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -10%); }
+    20% { transform: translate(-15%, 5%); }
+    30% { transform: translate(7%, -25%); }
+    40% { transform: translate(-5%, 25%); }
+    50% { transform: translate(-15%, 10%); }
+    60% { transform: translate(15%, 0%); }
+    70% { transform: translate(0%, 15%); }
+    80% { transform: translate(3%, 35%); }
+    90% { transform: translate(-10%, 10%); }
+  }
+
   .title-primary {
     @apply font-playfair text-[clamp(2.5rem,8vw,6.5rem)] font-medium leading-[1.1] tracking-tight;
   }
@@ -70,19 +100,28 @@
     @apply relative min-h-screen flex items-center justify-center text-center pt-20 z-[1] overflow-hidden;
   }
 
-  .hero-background::before {
-    content: '';
-    @apply absolute top-0 left-0 w-full h-full -z-[1] bg-cover bg-center bg-no-repeat transition-opacity duration-500;
+  .hero-background-overlay {
+    @apply absolute inset-0 -z-[1] bg-cover bg-center bg-no-repeat transition-opacity duration-700;
+  }
+
+  .hero-bg-dark {
+    @apply opacity-100;
     background-image: 
       linear-gradient(to bottom, rgba(4, 4, 5, 0.4) 0%, rgba(4, 4, 5, 0.8) 70%, #040405 100%),
       url('/hero-bg.png');
+    [data-theme='light'] & {
+      @apply opacity-0;
+    }
   }
 
-  [data-theme='light'] .hero-background::before {
-    @apply brightness-[0.9] contrast-[1.05];
+  .hero-bg-light {
+    @apply opacity-0 brightness-[0.98] contrast-[1.02];
     background-image: 
-      linear-gradient(to bottom, rgba(248, 246, 240, 0.65) 0%, rgba(248, 246, 240, 0.95) 70%, #F8F6F0 100%),
+      linear-gradient(to bottom, rgba(248, 246, 240, 0.6) 0%, rgba(248, 246, 240, 0.9) 70%, #F8F6F0 100%),
       url('/hero-bg-light.png');
+    [data-theme='light'] & {
+      @apply opacity-100;
+    }
   }
 
   .shadow-luxury {
@@ -90,6 +129,36 @@
     [data-theme='dark'] & {
       @apply shadow-none;
     }
+  }
+
+  /* Reveal Animations */
+  .mask-reveal {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    animation: maskRevealAnim 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes maskRevealAnim {
+    from { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transform: translateY(100%); }
+    to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateY(0); }
+  }
+
+  /* Spotlight Atelier Effects */
+  .spotlight-container {
+    perspective: 1000px;
+  }
+  
+  .spotlight-card {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glow-bleed {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    transition: text-shadow 0.5s ease;
+  }
+
+  .spotlight-active .glow-bleed {
+    text-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
   }
 }
 
@@ -100,4 +169,13 @@
 
 .animate-fade-up {
   animation: fadeUpElegance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.95); }
 }

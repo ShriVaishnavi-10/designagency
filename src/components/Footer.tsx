@@ -1,24 +1,34 @@
-import Image from 'next/image';
+import Magnetic from './Magnetic';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="py-20 bg-background border-t border-border-accent">
-      <div className="container flex flex-col">
-        <div className="flex justify-between items-center mb-20 max-md:flex-col max-md:items-start max-md:gap-10">
-          <div className="font-playfair text-[2.5rem] font-medium text-foreground flex items-center gap-4">
-            <Image src="/logo.svg" alt="Aura Logo" width={40} height={40} className="block" />
-            <span>Aura<span className="text-accent">.</span></span>
+    <footer className="py-20 border-t border-border-accent bg-background">
+      <div className="container">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-10">
+          <div className="flex items-center gap-3">
+            <Magnetic strength={0.2}>
+              <div className="font-playfair text-2xl font-medium text-foreground cursor-pointer">
+                Aura<span className="text-accent">.</span>
+              </div>
+            </Magnetic>
           </div>
-          <div className="flex gap-10 max-md:flex-col max-md:gap-5">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="font-jakarta text-[0.9rem] text-foreground transition-all hover:text-accent opacity-80 hover:opacity-100">Instagram</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="font-jakarta text-[0.9rem] text-foreground transition-all hover:text-accent opacity-80 hover:opacity-100">LinkedIn</a>
+          
+          <div className="flex gap-10">
+            <Magnetic strength={0.4}>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="font-jakarta text-[0.85rem] tracking-wider text-muted hover:text-accent transition-colors">Instagram</a>
+            </Magnetic>
+            <Magnetic strength={0.4}>
+              <a href="https://beiance.com" target="_blank" rel="noopener noreferrer" className="font-jakarta text-[0.85rem] tracking-wider text-muted hover:text-accent transition-colors">Behance</a>
+            </Magnetic>
+            <Magnetic strength={0.4}>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="font-jakarta text-[0.85rem] tracking-wider text-muted hover:text-accent transition-colors">LinkedIn</a>
+            </Magnetic>
           </div>
-        </div>
-        <div className="flex justify-between items-center pt-10 border-t border-white/5 text-[0.8rem] font-light text-muted max-md:flex-col-reverse max-md:items-start max-md:gap-8">
-          <p>© {new Date().getFullYear()} Aura Design Studio. All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="transition-colors hover:text-foreground">Privacy Policy</a>
-            <a href="#" className="transition-colors hover:text-foreground">Terms of Service</a>
+          
+          <div className="font-jakarta text-[0.85rem] text-muted opacity-60">
+            © {currentYear} Aura Studio. All rights reserved.
           </div>
         </div>
       </div>

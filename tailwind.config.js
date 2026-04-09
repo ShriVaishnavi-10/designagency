@@ -14,6 +14,7 @@ module.exports = {
         accent: 'var(--accent)',
         'border-accent': 'var(--border-accent)',
         'glass-bg': 'var(--glass-bg)',
+        'bg-soft': 'var(--bg-soft)',
         obsidian: '#040405',
         'obsidian-soft': '#0A0A0C',
         pearl: '#FDFCF0',

@@ -1,13 +1,12 @@
-import type { Metadata } from 'next';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import './globals.css';
+import type { Metadata } from "next";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
+import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
-  title: 'Aura | Studio',
-  description: 'A premium, precision-crafted digital design studio.',
-  icons: {
-    icon: '/logo.svg',
-  },
+  title: "Aura | Boutique Digital Studio",
+  description: "Bespoke digital experiences for visionary brands.",
 };
 
 export default function RootLayout({
@@ -17,8 +16,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
-        <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem={false}>
+      <body className="antialiased lg:cursor-none">
+        <ThemeProvider
+          attribute="data-theme"
+          defaultTheme="dark"
+          enableSystem={false}
+          storageKey="aura-theme"
+        >
+          <Preloader />
+          <CustomCursor />
           {children}
         </ThemeProvider>
       </body>
