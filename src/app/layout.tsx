@@ -26,6 +26,8 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
+                  localStorage.removeItem('theme'); // Reset persistence
+                  localStorage.removeItem('aura-final-theme'); 
                   document.documentElement.setAttribute('data-theme', 'dark');
                 } catch (e) {}
               })();
