@@ -23,7 +23,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className={`fixed top-0 left-1/2 -translate-x-1/2 w-full z-[1000] flex justify-center px-[6vw] pointer-events-none transition-all duration-500 ${scrolled ? 'py-5' : 'py-8'}`}>
+    <header className={`fixed top-0 left-1/2 -translate-x-1/2 w-full flex justify-center px-[6vw] pointer-events-none transition-all duration-500 ${scrolled ? 'py-5' : 'py-8'} ${isOpen ? 'z-[99999]' : 'z-[1000]'}`}>
       <nav className={`pointer-events-auto flex justify-between items-center w-full max-w-[1000px] px-6 md:px-10 transition-all duration-500 rounded-full border ${scrolled ? 'bg-background/60 backdrop-blur-xl border-border-accent shadow-2xl py-3' : 'bg-transparent border-transparent py-4'}`}>
         <Magnetic strength={0.2}>
           <div className="font-playfair text-xl md:text-2xl font-medium text-foreground flex items-center gap-3 cursor-pointer">
@@ -91,10 +91,11 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[99999] pointer-events-auto flex flex-col px-8 pt-[12vh]"
+            className="fixed inset-0 z-[99999] pointer-events-auto flex flex-col px-8 pt-[12vh] w-screen h-screen"
             style={{ 
-              backgroundColor: scrolled ? 'var(--background)' : '#040405',
-              backgroundImage: 'none'
+              backgroundColor: '#000000',
+              backgroundImage: 'none',
+              opacity: 1
             }}
           >
             {/* Header Lock (Logo & Close) */}
