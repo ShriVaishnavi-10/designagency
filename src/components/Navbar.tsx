@@ -99,8 +99,8 @@ export default function Navbar() {
             }}
           >
             {/* Header Lock (Logo & Close) */}
-            <div className="flex justify-between items-center w-full mb-16">
-              <div className="font-playfair text-xl font-medium text-foreground flex items-center gap-3">
+            <div className="flex justify-between items-center w-full mb-16 px-2">
+              <div className="font-playfair text-xl font-medium text-[#FDFCF0] flex items-center gap-3">
                 <div className="w-6 h-6">
                   <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M50 15L85 85H75L50 35L25 85H15L50 15Z" fill="#D4AF37" />
@@ -135,7 +135,7 @@ export default function Navbar() {
                     className="flex items-baseline gap-4 py-4 border-b border-border-accent/40 group overflow-hidden"
                   >
                     <span className="font-jakarta text-[0.6rem] text-accent/50 tracking-[0.3em] font-medium">0{index + 1}</span>
-                    <span className="font-playfair text-5xl font-medium text-foreground group-hover:text-accent transition-colors">
+                    <span className="font-playfair text-5xl font-medium text-[#FDFCF0] group-hover:text-accent transition-colors">
                       {link.name}
                     </span>
                   </a>
