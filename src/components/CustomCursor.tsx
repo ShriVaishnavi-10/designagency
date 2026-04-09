@@ -53,11 +53,12 @@ export default function CustomCursor() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 rounded-full border border-accent pointer-events-none z-[9999] hidden lg:flex items-center justify-center overflow-hidden"
+        className="fixed top-0 left-0 rounded-full border border-accent pointer-events-none z-[9999] hidden lg:flex items-center justify-center"
         style={{
-          transform: 'translate(-50%, -50%)',
           x: cursorX,
           y: cursorY,
+          translateX: '-50%',
+          translateY: '-50%',
           width: isProjectHover ? 80 : 32,
           height: isProjectHover ? 80 : 32,
         }}
@@ -67,7 +68,7 @@ export default function CustomCursor() {
         }}
         transition={{ type: 'spring', damping: 20, stiffness: 200, mass: 0.2 }}
       >
-        {isProjectHover && (
+        {isProjectHover ? (
           <motion.span 
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -75,19 +76,13 @@ export default function CustomCursor() {
           >
             VIEW
           </motion.span>
+        ) : (
+          <motion.div
+            className="w-1 h-1 rounded-full bg-accent"
+            animate={{ scale: isHovering ? 2 : 1 }}
+          />
         )}
       </motion.div>
-      <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-accent pointer-events-none z-[9999] hidden lg:block"
-        style={{
-          transform: 'translate(-50%, -50%)',
-          x: cursorX,
-          y: cursorY,
-        }}
-        animate={{
-          opacity: isProjectHover ? 0 : 1
-        }}
-      />
     </>
   );
 }
