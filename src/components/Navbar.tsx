@@ -82,23 +82,23 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
+      {/* Mobile Menu Overlay - Move out of the nav constraint */}
+      <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
+            key="mobile-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 bg-[#040405] dark:bg-[#040405] light:bg-[#F8F6F0] z-[2000] pointer-events-auto flex flex-col pt-[15vh] px-8"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[99999] pointer-events-auto flex flex-col px-8 pt-[12vh]"
+            style={{ 
+              backgroundColor: scrolled ? 'var(--background)' : '#040405',
+              backgroundImage: 'none'
+            }}
           >
-            {/* Background Decorative Element */}
-            <div className="absolute inset-0 -z-10 opacity-[0.03] pointer-events-none overflow-hidden">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] border border-accent rounded-full animate-pulse-slow"></div>
-            </div>
-
-            {/* Overlay Header (Logo & Close) */}
-            <div className="flex justify-between items-center w-full mb-16 px-2">
+            {/* Header Lock (Logo & Close) */}
+            <div className="flex justify-between items-center w-full mb-16">
               <div className="font-playfair text-xl font-medium text-foreground flex items-center gap-3">
                 <div className="w-6 h-6">
                   <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -112,44 +112,56 @@ export default function Navbar() {
               
               <button 
                 onClick={() => setIsOpen(false)}
-                className="p-2 text-accent uppercase font-jakarta text-[0.7rem] tracking-[0.2em] font-medium border border-accent/20 rounded-full px-4"
+                className="p-2 text-accent border border-accent/20 rounded-full px-5 py-1.5 font-jakarta text-[0.7rem] uppercase tracking-[0.2em]"
               >
                 Close [✕]
               </button>
             </div>
 
-            {/* Links */}
-            <div className="flex flex-col gap-6 w-full">
+            {/* Content Stack */}
+            <div className="flex flex-col gap-4">
               {navLinks.map((link, index) => (
-                <motion.a
+                <motion.div
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  initial={{ opacity: 0, x: -30 }}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="group flex items-end gap-5 py-2 border-b border-border-accent"
+                  transition={{ delay: 0.1 + index * 0.1 }}
+                  className="overflow-hidden"
                 >
-                  <span className="text-[0.65rem] font-jakarta text-accent mb-2 tracking-[0.2em] font-medium">0{index + 1}</span>
-                  <span className="font-playfair text-[clamp(2.5rem,10vw,4rem)] font-medium text-foreground hover:text-accent transition-colors tracking-tight leading-none">
-                    {link.name}
-                  </span>
-                </motion.a>
+                  <a
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-baseline gap-4 py-4 border-b border-border-accent/40 group overflow-hidden"
+                  >
+                    <span className="font-jakarta text-[0.6rem] text-accent/50 tracking-[0.3em] font-medium">0{index + 1}</span>
+                    <span className="font-playfair text-5xl font-medium text-foreground group-hover:text-accent transition-colors">
+                      {link.name}
+                    </span>
+                  </a>
+                </motion.div>
               ))}
               
-              <motion.a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                initial={{ opacity: 0, x: -30 }}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="group flex items-end gap-5 py-2 mt-2"
+                transition={{ delay: 0.4 }}
               >
-                <span className="text-[0.65rem] font-jakarta text-accent mb-2 tracking-[0.2em] font-medium">03</span>
-                <span className="font-playfair text-[clamp(2.5rem,10vw,4rem)] font-medium text-accent hover:opacity-80 transition-opacity tracking-tight leading-none">
-                  Contact Us
-                </span>
-              </motion.a>
+                <a
+                  href="#contact"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-baseline gap-4 py-8 group"
+                >
+                  <span className="font-jakarta text-[0.6rem] text-accent/50 tracking-[0.3em] font-medium">03</span>
+                  <span className="font-playfair text-5xl font-medium text-accent italic">
+                    Contact Us
+                  </span>
+                </a>
+              </motion.div>
+            </div>
+
+            {/* Decorative Pulse */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-[0.03] pointer-events-none">
+              <div className="w-[120vw] h-[120vw] border border-accent rounded-full animate-pulse-slow"></div>
             </div>
           </motion.div>
         )}
