@@ -32,7 +32,7 @@ export default function Navbar() {
           </div>
         </Magnetic>
         
-        <div className="flex gap-4 md:gap-10 items-center">
+        <div className="flex gap-2 md:gap-10 items-center">
           {/* Desktop Links */}
           <div className="hidden md:flex gap-10 items-center">
             {navLinks.map((link) => (
@@ -49,31 +49,34 @@ export default function Navbar() {
             ))}
           </div>
 
-          <Magnetic strength={0.4}>
-            <a href="#contact" className="group relative font-jakarta text-[0.85rem] font-normal tracking-wider text-accent transition-all hover:opacity-80 p-2">
-              Contact Us
-              <span className="absolute -bottom-1 left-2 w-[calc(100%-16px)] h-[1px] bg-accent" />
-            </a>
-          </Magnetic>
+          <div className="hidden md:block">
+            <Magnetic strength={0.4}>
+              <a href="#contact" className="group relative font-jakarta text-[0.85rem] font-normal tracking-wider text-accent transition-all hover:opacity-80 p-2">
+                Contact Us
+                <span className="absolute -bottom-1 left-2 w-[calc(100%-16px)] h-[1px] bg-accent" />
+              </a>
+            </Magnetic>
+          </div>
 
           <ThemeToggle />
 
           {/* Mobile Toggle */}
           <button 
             onClick={() => setIsOpen(!isOpen)}
-            className="flex flex-col gap-1.5 p-2 md:hidden z-[1001]"
+            className="flex flex-col gap-1.5 p-3 md:hidden z-[1001] relative"
+            aria-label="Toggle Menu"
           >
             <motion.span 
-              animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              className="w-6 h-[1px] bg-foreground"
+              animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              className="w-5 h-[1.5px] bg-foreground transition-colors"
             />
             <motion.span 
               animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="w-6 h-[1px] bg-foreground"
+              className="w-5 h-[1.5px] bg-foreground transition-colors"
             />
             <motion.span 
-              animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-              className="w-6 h-[1px] bg-foreground"
+              animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+              className="w-5 h-[1.5px] bg-foreground transition-colors"
             />
           </button>
         </div>
@@ -83,21 +86,21 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            className="fixed inset-0 bg-background/98 backdrop-blur-2xl z-[900] pointer-events-auto flex flex-col items-center justify-center pt-20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-background z-[900] pointer-events-auto flex flex-col items-center justify-center pt-10"
           >
-            <div className="flex flex-col gap-12 items-center">
+            <div className="flex flex-col gap-10 items-center">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="font-playfair text-5xl font-medium text-foreground hover:text-accent transition-colors"
+                  transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-playfair text-4xl font-medium text-foreground hover:text-accent transition-colors"
                 >
                   {link.name}
                 </motion.a>
@@ -105,13 +108,18 @@ export default function Navbar() {
               <motion.a
                 href="#contact"
                 onClick={() => setIsOpen(false)}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="font-playfair text-4xl italic text-accent"
+                transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="font-playfair text-3xl italic text-accent mt-4"
               >
                 Start a project
               </motion.a>
+            </div>
+            
+            {/* Background Decorative Element */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-[0.03] pointer-events-none">
+              <div className="w-[80vw] h-[80vw] border border-accent rounded-full animate-pulse-slow"></div>
             </div>
           </motion.div>
         )}
