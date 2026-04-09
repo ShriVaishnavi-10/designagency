@@ -63,7 +63,7 @@
   }
 
   .title-primary {
-    @apply font-playfair text-[clamp(2.5rem,8vw,6.5rem)] font-medium leading-[1.1] tracking-tight;
+    @apply font-playfair text-[clamp(2.5rem,12vw,6.5rem)] font-medium leading-[1.1] tracking-tight;
   }
   
   .title-secondary {
@@ -89,7 +89,7 @@
   }
   
   .section {
-    @apply py-[15vh];
+    @apply py-[12vh] md:py-[15vh];
   }
 
   .ambient-glow {
@@ -178,4 +178,9 @@
 @keyframes pulseSlow {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(0.95); }
+}
+
+@media (max-width: 1024px) {
+  .lg\:flex { display: none !important; }
+  .lg\:block { display: none !important; }
 }
